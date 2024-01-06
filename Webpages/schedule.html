@@ -1,0 +1,85 @@
+<!-- schedule.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generated Schedule</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="container">
+    <h1>Schedule Information for <span id="cropName"></span></h1>
+    <p>Climate: <span id="climate"></span></p>
+    <p>Soil Type: <span id="soilType"></span></p>
+    <p>Temperature (°C): <span id="temperature"></span></p>
+    <p>Humidity (%): <span id="humidity"></span></p>
+    <p>Water Requirement (mm): <span id="waterRequirement"></span></p>
+    <p>Life Span (days): <span id="lifeSpan"></span></p>
+
+    <br>
+    
+    <p id="scheduleGenerated">Schedule generated</p>
+    
+    <br>
+
+    <button onclick="downloadSchedule()">Download Schedule</button>
+</div>
+
+<script>
+    // Function to extract query parameters from the URL
+    function getQueryVariable(variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            if (pair[0] === variable) {
+                return pair[1];
+            }
+        }
+        return null;
+    }
+
+    // Function to set schedule information based on the selected crop
+    function setScheduleInfo(crop) {
+        var cropInfo = {
+            "rice": {climate: "Tropical", soilType: "Clayey", temperature: 30, humidity: 80, waterRequirement: 35, lifeSpan: 210},
+            "banana": {climate: "Tropical", soilType: "Sandy", temperature: 28, humidity: 85, waterRequirement: 40, lifeSpan: 180},
+            "wheat": {climate: "Temperate", soilType: "Loamy", temperature: 20, humidity: 70, waterRequirement: 25, lifeSpan: 120},
+            "tomato": {climate: "Mediterranean", soilType: "Silty", temperature: 25, humidity: 75, waterRequirement: 30, lifeSpan: 150},
+            "corn": {climate: "Temperate", soilType: "Sandy Loam", temperature: 22, humidity: 75, waterRequirement: 35, lifeSpan: 180},
+            "potato": {climate: "Cool", soilType: "Loamy", temperature: 18, humidity: 65, waterRequirement: 28, lifeSpan: 150},
+            "carrot": {climate: "Cool", soilType: "Sandy Loam", temperature: 15, humidity: 60, waterRequirement: 20, lifeSpan: 120},
+        };
+
+        var cropData = cropInfo[crop];
+
+        document.getElementById("cropName").innerText = crop.charAt(0).toUpperCase() + crop.slice(1);
+        document.getElementById("climate").innerText = cropData.climate;
+        document.getElementById("soilType").innerText = cropData.soilType;
+        document.getElementById("temperature").innerText = cropData.temperature;
+        document.getElementById("humidity").innerText = cropData.humidity;
+        document.getElementById("waterRequirement").innerText = cropData.waterRequirement;
+        document.getElementById("lifeSpan").innerText = cropData.lifeSpan;
+    }
+
+    // Function to handle schedule download (placeholder function)
+    function downloadSchedule() {
+        // In a real scenario, you would provide a downloadable schedule file.
+        alert("Schedule download functionality will be implemented here.");
+    }
+
+    // On page load, set schedule information based on the selected crop
+    window.onload = function () {
+        var selectedCrop = getQueryVariable("crop");
+        if (selectedCrop !== null) {
+            setScheduleInfo(selectedCrop);
+        } else {
+            alert("Invalid crop selection.");
+        }
+    };
+</script>
+
+</body>
+</html>

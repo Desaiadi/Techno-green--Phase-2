@@ -1,0 +1,36 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Based Irrigation Schedule Generator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="container">
+    <h1>AI-Based Irrigation Schedule Generator</h1>
+    <label for="cropType">Select Crop Type:</label>
+    <select id="cropType">
+        <option value="rice">Rice</option>
+        <option value="banana">Banana</option>
+        <option value="wheat">Wheat</option>
+        <option value="tomato">Tomato</option>
+        <option value="corn">Corn</option>
+        <option value="potato">Potato</option>
+        <option value="carrot">Carrot</option>
+    </select>
+    <br><br>
+    <button onclick="generateSchedule()">Generate Schedule</button>
+</div>
+
+<script>
+    function generateSchedule() {
+        var selectedCrop = document.getElementById("cropType").value;
+        window.location.href = "schedule.html?crop=" + selectedCrop;
+    }
+</script>
+
+</body>
+</html>

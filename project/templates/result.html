@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Techogreen - Result</title>
+</head>
+<body>
+    <h1>Generated Schedule</h1>
+    {% if schedule %}
+        <table border="1">
+            <tr>
+                <th>Crop</th>
+                <th>Day</th>
+                <th>Water Requirement (Crop)</th>
+                <th>Water Requirement (Greenhouse)</th>
+                <th>Motor Run Time (Minutes)</th>
+            </tr>
+            {% for index, row in schedule.iterrows() %}
+                <tr>
+                    <td>{{ row['Crop'] }}</td>
+                    <td>{{ row['Day'] }}</td>
+                    <td>{{ row['Water_Requirement_Crop'] }}</td>
+                    <td>{{ row['Water_Requirement_Greenhouse'] }}</td>
+                    <td>{{ row['Motor_Run_Time_Minutes'] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <a href="{{ url_for('download', file_path=file_path) }}" download>Download CSV</a>
+    {% else %}
+        <p>No data found for the selected crop.</p>
+    {% endif %}
+</body>
+</html>
